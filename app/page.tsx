@@ -1,45 +1,11 @@
-const works = [
-  { no: '01', title: '断层 / FAULT LINE', meta: '山地 · 2026', image: 'https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1800&q=82' },
-  { no: '02', title: '银色噪点', meta: '城市 · 2025', image: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1400&q=82' },
-  { no: '03', title: '临界风速', meta: '纪录影像 · 04:18', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=82' },
-];
-
-export default function Home() {
-  return (
-    <main>
-      <nav className="nav">
-        <a className="wordmark" href="#top" aria-label="ZHOUYAWEI 首页">ZHOUYAWEI<span>///</span></a>
-        <div className="nav-links"><a href="#works">WORKS</a><a href="#about">ABOUT</a><a href="mailto:hello@zhouyawei.com">CONTACT</a></div>
-        <span className="location">CN / 31.2°N</span>
-      </nav>
-      <section className="hero" id="top">
-        <img className="hero-image" src="https://images.unsplash.com/photo-1486911278844-a81c5267e227?auto=format&fit=crop&w=2200&q=88" alt="群山与荒野的黑白摄影" />
-        <div className="hero-shade" />
-        <div className="hero-index">PORTFOLIO<br />2024—2026</div>
-        <div className="hero-copy"><p>PHOTOGRAPHY / MOTION / EXTREME</p><h1>进入<br /><i>无界</i></h1></div>
-        <div className="hero-foot"><span>VISUAL ARCHIVE 001—024</span><a href="#works">下滑探索 <b>↓</b></a></div>
-      </section>
-      <section className="manifesto" id="about">
-        <p className="eyebrow">/ MANIFESTO</p>
-        <p className="statement">在山脊、风暴和城市边缘之间，<br />记录人与世界碰撞的瞬间。</p>
-        <div className="coords">ZHOU YAWEI<br />INDEPENDENT VISUAL ARTIST</div>
-      </section>
-      <section className="works" id="works">
-        <header className="section-head"><p>SELECTED WORKS</p><span>03 / 24</span></header>
-        <div className="work-grid">
-          {works.map((work, index) => (
-            <article className={`work work-${index + 1}`} key={work.no}>
-              <div className="frame"><img src={work.image} alt={work.title} />{index === 2 && <span className="play">▶</span>}<span className="corner">{work.no}</span></div>
-              <div className="work-title"><h2>{work.title}</h2><p>{work.meta}</p></div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <footer>
-        <div className="footer-mark">ZY<span>°</span></div>
-        <div><p>合作 / 约拍 / 展览</p><a href="mailto:hello@zhouyawei.com">HELLO@ZHOUYAWEI.COM ↗</a></div>
-        <p className="copyright">© 2026 ZHOUYAWEI<br />ALL RIGHTS RESERVED</p>
-      </footer>
-    </main>
-  );
-}
+const photos=[['荒野边缘','https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=82'],['岩层与风','https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1400&q=82'],['城市游离','https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1400&q=82']];
+export default function Home(){return <main>
+<nav className="nav"><a className="wordmark" href="#top">ZHOUYAWEI<span>/ VISUAL ARCHIVE</span></a><div className="nav-links"><a href="#profile">简介</a><a href="#graphic">平面</a><a href="#motion">视频</a><a href="#contact">合作</a></div></nav>
+<header className="hero" id="top"><div className="grain"/><div className="folio">PORTFOLIO<br/>MMXXVI</div><div className="hero-copy"><p>PHOTOGRAPHY · FILM · ART DIRECTION</p><h1>ZHOU<br/><i>YAWEI</i></h1><div className="hero-note"><span>01</span><p>从自然的表皮与城市的缝隙中，<br/>拾取时间留下的纹理。</p></div></div><a className="scroll" href="#profile">SCROLL TO READ ↓</a></header>
+<section className="profile paper" id="profile"><p className="label">01 / PROFILE</p><div><h2>个人简介</h2><p className="lead">我是 Zhou Yawei，一名关注自然、身体与场所关系的独立视觉创作者。以摄影和动态影像为主要媒介，在真实记录与先锋表达之间建立叙事。</p><div className="profile-meta"><span>BASED IN CHINA</span><span>AVAILABLE WORLDWIDE</span><span>EST. 2024</span></div></div></section>
+<section className="gallery" id="graphic"><header className="section-head"><p>02 / PHOTOGRAPHY</p><h2>平面作品</h2><span>SELECTED 03</span></header><div className="photo-grid">{photos.map((p,i)=><article className={`photo p${i+1}`} key={p[0]}><div className="image-wrap"><img src={p[1]} alt={p[0]}/><span>0{i+1}</span></div><h3>{p[0]}</h3><p>PERSONAL SERIES / 2026</p></article>)}</div></section>
+<section className="motion" id="motion"><div className="motion-image"><img src="https://images.unsplash.com/photo-1486911278844-a81c5267e227?auto=format&fit=crop&w=2000&q=85" alt="视频作品封面"/><span className="play">▶</span></div><div className="motion-copy"><p className="label">03 / MOTION</p><h2>视频<br/>作品</h2><p>品牌短片、户外纪录、人物故事与实验影像。</p><a href="#contact">VIEW FILM INDEX ↗</a></div></section>
+<section className="partners paper"><p className="label">04 / COLLABORATION</p><div><h2>合作品牌</h2><p className="subcopy">横跨时装、配饰、珠宝、腕表与生活方式领域的视觉创作与项目经验。</p><figure className="brand-board"><img src="/brands.png" alt="BOSS、DIESEL、TUMI、MCM、BALLY、GUCCI、New Balance、PANDORA、Clarks、Kipling等合作品牌"/><figcaption>SELECTED CLIENTS / BRAND COLLABORATIONS</figcaption></figure></div></section>
+<section className="projects"><header className="section-head"><p>05 / PROJECTS</p><h2>参与项目</h2><span>ARCHIVE</span></header>{[['2026','高山影像计划','DOCUMENTARY / PHOTOGRAPHY'],['2025','城市边界','EDITORIAL / VISUAL STORY'],['2024','风的档案','PERSONAL / MOTION']].map(x=><div className="project-row" key={x[1]}><div><span>{x[0]}</span><h3>{x[1]}</h3></div><p>{x[2]}</p></div>)}</section>
+<footer id="contact"><p className="label">06 / CONTACT</p><div className="contact-title"><p>LET&apos;S MAKE<br/>SOMETHING REAL.</p><h2>一起合作</h2></div><div className="contact-links"><a href="mailto:hello@zhouyawei.com">HELLO@ZHOUYAWEI.COM ↗</a><span>WECHAT / 待填写</span><span>RED / 待填写</span></div><div className="footnote"><b>ZHOUYAWEI°</b><span>© 2026 ALL RIGHTS RESERVED</span></div></footer>
+</main>}
