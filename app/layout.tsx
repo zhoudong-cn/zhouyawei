@@ -3,18 +3,16 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://zhouyawei-extreme.zhouyaweijay.chatgpt.site'),
-  title: 'ZHOUYAWEI — 摄影与动态影像',
-  description: '周亚伟的先锋摄影与视频作品集。',
+  title: '静默影像作品集',
+  description: '摄影、视频、品牌合作与项目档案。',
   openGraph: {
-    title: 'ZHOUYAWEI — 摄影与动态影像',
-    description: 'PHOTOGRAPHY / MOTION / EXTREME',
-    images: ['/og.png'],
+    title: '静默影像作品集',
+    description: 'PHOTOGRAPHY / MOTION / QUIET IMAGE',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ZHOUYAWEI — 摄影与动态影像',
-    description: 'PHOTOGRAPHY / MOTION / EXTREME',
-    images: ['/og.png'],
+    title: '静默影像作品集',
+    description: 'PHOTOGRAPHY / MOTION / QUIET IMAGE',
   },
 };
 
