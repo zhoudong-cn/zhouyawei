@@ -1,0 +1,11 @@
+# Build artifacts / junk
+_next/
+options/
+docs_bak/
+*.bak
+
+# Unused assets (not referenced by the site)
+brands.png
+og.png
+assets/works/
+assets/still-*.jpg

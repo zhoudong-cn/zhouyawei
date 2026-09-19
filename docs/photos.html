@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>图片作品 · 周亚伟作品网</title>
+    <meta name="description" content="周亚伟作品网 · 图片作品：时装摄影与品牌合作影像排版。" />
+    <meta name="theme-color" content="#050505" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <main class="page">
+      <a class="back" href="index.html">← 返回首页</a>
+
+      <div class="spreads">
+        <button class="spread" type="button" data-full="assets/spreads/spread01.jpg"><img src="assets/spreads/spread01.jpg" alt="作品排版 01" loading="lazy" /></button>
+        <button class="spread" type="button" data-full="assets/spreads/spread02.jpg"><img src="assets/spreads/spread02.jpg" alt="作品排版 02" loading="lazy" /></button>
+        <button class="spread" type="button" data-full="assets/spreads/spread03.jpg"><img src="assets/spreads/spread03.jpg" alt="作品排版 03" loading="lazy" /></button>
+        <button class="spread" type="button" data-full="assets/spreads/spread04.jpg"><img src="assets/spreads/spread04.jpg" alt="作品排版 04" loading="lazy" /></button>
+        <button class="spread" type="button" data-full="assets/spreads/spread05.jpg"><img src="assets/spreads/spread05.jpg" alt="作品排版 05" loading="lazy" /></button>
+        <button class="spread" type="button" data-full="assets/spreads/spread06.jpg"><img src="assets/spreads/spread06.jpg" alt="作品排版 06" loading="lazy" /></button>
+        <button class="spread" type="button" data-full="assets/spreads/spread07.jpg"><img src="assets/spreads/spread07.jpg" alt="作品排版 07" loading="lazy" /></button>
+        <button class="spread" type="button" data-full="assets/spreads/spread08.jpg"><img src="assets/spreads/spread08.jpg" alt="作品排版 08" loading="lazy" /></button>
+        <button class="spread" type="button" data-full="assets/spreads/spread09.jpg"><img src="assets/spreads/spread09.jpg" alt="作品排版 09" loading="lazy" /></button>
+      </div>
+    </main>
+
+    <div class="lb" id="lb" role="dialog" aria-modal="true">
+      <button class="lb-close" type="button" aria-label="关闭">×</button>
+      <img id="lb-img" src="" alt="" />
+    </div>
+
+    <script>
+      (function () {
+        var lb = document.getElementById("lb");
+        var img = document.getElementById("lb-img");
+        function open(src) {
+          img.src = src;
+          lb.classList.add("open");
+        }
+        function close() {
+          lb.classList.remove("open");
+          img.src = "";
+        }
+        document.querySelectorAll(".spread").forEach(function (b) {
+          b.addEventListener("click", function () {
+            open(b.getAttribute("data-full"));
+          });
+        });
+        lb.addEventListener("click", function (e) {
+          if (e.target !== img) close();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") close();
+        });
+      })();
+    </script>
+  </body>
+</html>
