@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>个人简介 · 周亚伟作品网</title>
+    <meta name="description" content="周亚伟作品网 · 时尚摄影师个人简介：平面摄影、短片影像与品牌合作。" />
+    <meta name="theme-color" content="#050505" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <main class="page">
+      <a class="back" href="index.html">← 返回首页</a>
+
+      <header class="intro-hero">
+        <h1 class="intro-name">周亚伟</h1>
+        <p class="intro-role">时尚摄影师</p>
+      </header>
+
+      <div class="intro-grid">
+        <figure class="portrait">
+          <img
+            src="assets/portrait.jpg"
+            alt="周亚伟"
+            onerror="this.style.display='none';this.parentNode.classList.add('ph');this.parentNode.setAttribute('data-label','个人照片 portrait.jpg');"
+          />
+        </figure>
+
+        <div class="intro-body">
+          <p class="lead">毕业于攀枝花学院视觉传达设计专业。</p>
+          <p>深耕于时装行业，服务一线男女装品牌数十个，拍摄国内一线超模、千万级网红等。</p>
+        </div>
+      </div>
+
+      <section class="section">
+        <h2>擅长领域</h2>
+        <div class="rows">
+          <div class="row"><span class="yr">平面</span><h3>品牌与时装摄影</h3><span class="tag">商业拍摄 / 视觉方案</span></div>
+          <div class="row"><span class="yr">动态</span><h3>短片与人物记录</h3><span class="tag">导演 / 剪辑</span></div>
+          <div class="row"><span class="yr">项目</span><h3>影像档案整理</h3><span class="tag">长期记录 / 编辑</span></div>
+        </div>
+      </section>
+
+      <footer class="page-foot">
+        <span>© <span id="year">2026</span> 周亚伟作品网</span>
+        <a class="back" href="index.html" style="margin: 0">返回首页</a>
+      </footer>
+    </main>
+
+    <script>
+      var y = document.getElementById("year");
+      if (y) y.textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

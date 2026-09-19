@@ -1,0 +1,20 @@
+# Build artifacts / junk
+_next/
+options/
+docs_bak/
+*.bak
+
+# Unused assets
+brands.png
+og.png
+assets/works/
+assets/still-*.jpg
+
+# Site is published from docs/ — ignore stray root copies
+/index.html
+/styles.css
+/favicon.svg
+/intro.html
+/photos.html
+/videos.html
+/assets/

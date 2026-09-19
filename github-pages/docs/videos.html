@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>视频作品 · 周亚伟作品网</title>
+    <meta name="description" content="周亚伟作品网 · 短片与影像记录。" />
+    <meta name="theme-color" content="#050505" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="周亚伟作品网" />
+    <meta property="og:title" content="视频作品 · 周亚伟作品网" />
+    <meta property="og:description" content="短片与影像记录。" />
+    <meta property="og:image" content="https://zhoudong-cn.github.io/zhouyawei/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <a class="back" href="index.html">← 返回首页</a>
+      <header class="page-head">
+        <h1>视频作品</h1>
+      </header>
+
+      <section class="carousel" aria-roledescription="轮播">
+        <div class="carousel-stage">
+          <div class="carousel-track" id="track">
+            <div class="slide"><video controls preload="metadata" playsinline poster="assets/videos/v01.jpg" aria-label="视频 1"><source src="assets/videos/v01.mp4" type="video/mp4" /></video></div>
+            <div class="slide"><video controls preload="metadata" playsinline poster="assets/videos/v02.jpg" aria-label="视频 2"><source src="assets/videos/v02.mp4" type="video/mp4" /></video></div>
+            <div class="slide"><video controls preload="metadata" playsinline poster="assets/videos/v03.jpg" aria-label="视频 3"><source src="assets/videos/v03.mp4" type="video/mp4" /></video></div>
+            <div class="slide"><video controls preload="metadata" playsinline poster="assets/videos/v04.jpg" aria-label="视频 4"><source src="assets/videos/v04.mp4" type="video/mp4" /></video></div>
+            <div class="slide"><video controls preload="metadata" playsinline poster="assets/videos/v05.jpg" aria-label="视频 5"><source src="assets/videos/v05.mp4" type="video/mp4" /></video></div>
+            <div class="slide"><video controls preload="metadata" playsinline poster="assets/videos/v06.jpg" aria-label="视频 6"><source src="assets/videos/v06.mp4" type="video/mp4" /></video></div>
+          </div>
+
+          <button class="car-btn prev" id="prev" type="button" aria-label="上一个">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+          <button class="car-btn next" id="next" type="button" aria-label="下一个">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+        </div>
+
+        <div class="car-dots" id="dots" role="tablist" aria-label="视频导航"></div>
+      </section>
+
+      <footer class="page-foot">
+        <span>© <span id="year">2026</span> 周亚伟作品网</span>
+        <a class="back" href="index.html" style="margin:0">返回首页</a>
+      </footer>
+    </main>
+
+    <script>
+      (function(){
+        var y=document.getElementById("year"); if(y) y.textContent=new Date().getFullYear();
+        var track=document.getElementById("track");
+        var slides=Array.prototype.slice.call(track.children);
+        var prev=document.getElementById("prev");
+        var next=document.getElementById("next");
+        var dotsWrap=document.getElementById("dots");
+        var n=slides.length, i=0;
+
+        slides.forEach(function(s,di){
+          var b=document.createElement("button");
+          b.type="button";
+          b.setAttribute("role","tab");
+          b.setAttribute("aria-label","第 "+(di+1)+" 个视频");
+          b.addEventListener("click",function(){ go(di); });
+          dotsWrap.appendChild(b);
+        });
+        var dots=Array.prototype.slice.call(dotsWrap.children);
+
+        function sync(){
+          prev.disabled=i===0;
+          next.disabled=i===n-1;
+          dots.forEach(function(d,di){ d.classList.toggle("on",di===i); });
+          slides.forEach(function(s,si){
+            var v=s.querySelector("video");
+            if(v && si!==i) v.pause();
+          });
+        }
+        function go(k){
+          i=Math.max(0,Math.min(n-1,k));
+          track.style.transform="translateX("+(-i*100)+"%)";
+          sync();
+        }
+
+        prev.addEventListener("click",function(){ go(i-1); });
+        next.addEventListener("click",function(){ go(i+1); });
+        document.addEventListener("keydown",function(e){
+          if(e.key==="ArrowLeft") go(i-1);
+          else if(e.key==="ArrowRight") go(i+1);
+        });
+
+        var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if(reduce) track.classList.add("no-anim");
+        sync();
+      })();
+    </script>
+  </body>
+</html>
