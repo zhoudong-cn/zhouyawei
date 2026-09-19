@@ -40,6 +40,8 @@
           <button class="car-btn next" id="next" type="button" aria-label="下一个">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
           </button>
+
+          <div class="car-progress" aria-hidden="true"><span id="progFill"></span></div>
         </div>
 
         <div class="car-dots" id="dots" role="tablist" aria-label="视频导航"></div>
@@ -55,25 +57,26 @@
       (function(){
         var y=document.getElementById("year"); if(y) y.textContent=new Date().getFullYear();
         var track=document.getElementById("track");
+        var stage=track.parentNode;
         var slides=Array.prototype.slice.call(track.children);
         var prev=document.getElementById("prev");
         var next=document.getElementById("next");
         var dotsWrap=document.getElementById("dots");
+        var progFill=document.getElementById("progFill");
         var n=slides.length, i=0;
+        var INTERVAL=5000, timer=null;
 
         slides.forEach(function(s,di){
           var b=document.createElement("button");
           b.type="button";
           b.setAttribute("role","tab");
           b.setAttribute("aria-label","第 "+(di+1)+" 个视频");
-          b.addEventListener("click",function(){ go(di); });
+          b.addEventListener("click",function(){ go(di); start(); });
           dotsWrap.appendChild(b);
         });
         var dots=Array.prototype.slice.call(dotsWrap.children);
 
         function sync(){
-          prev.disabled=i===0;
-          next.disabled=i===n-1;
           dots.forEach(function(d,di){ d.classList.toggle("on",di===i); });
           slides.forEach(function(s,si){
             var v=s.querySelector("video");
@@ -81,21 +84,49 @@
           });
         }
         function go(k){
-          i=Math.max(0,Math.min(n-1,k));
+          i=(k%n+n)%n;
           track.style.transform="translateX("+(-i*100)+"%)";
           sync();
+          restartProgress();
         }
 
-        prev.addEventListener("click",function(){ go(i-1); });
-        next.addEventListener("click",function(){ go(i+1); });
+        function restartProgress(){
+          if(!progFill) return;
+          progFill.style.animation="none";
+          void progFill.offsetWidth;
+          if(!reduce) progFill.style.animation="carfill "+INTERVAL+"ms linear forwards";
+          else progFill.style.transform="scaleX(1)";
+        }
+        function start(){
+          stop();
+          if(reduce) return;
+          timer=setInterval(function(){
+            var v=slides[i].querySelector("video");
+            if(v && !v.paused && !v.ended && v.currentTime>0) return; // 不打断正在播放的视频
+            go(i+1);
+          },INTERVAL);
+          stage.classList.remove("paused");
+        }
+        function stop(){
+          if(timer){ clearInterval(timer); timer=null; }
+          stage.classList.add("paused");
+        }
+
+        prev.addEventListener("click",function(){ go(i-1); start(); });
+        next.addEventListener("click",function(){ go(i+1); start(); });
         document.addEventListener("keydown",function(e){
-          if(e.key==="ArrowLeft") go(i-1);
-          else if(e.key==="ArrowRight") go(i+1);
+          if(e.key==="ArrowLeft"){ go(i-1); start(); }
+          else if(e.key==="ArrowRight"){ go(i+1); start(); }
         });
+
+        stage.addEventListener("mouseenter",stop);
+        stage.addEventListener("mouseleave",start);
+        document.addEventListener("visibilitychange",function(){ if(document.hidden) stop(); else start(); });
 
         var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if(reduce) track.classList.add("no-anim");
         sync();
+        start();
       })();
     </script>
   </body>
